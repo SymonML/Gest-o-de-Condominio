@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Condominio{
+    
+    public bool Pagamento {get; set; }
+    public float VlrDespesas {get; set; }
+    public float vlrCaixa {get; set; }
+    
+    public Condominio (bool pagamento, float gastos, float caixa){
+    
+        Pagamento = pagamento;
+        VlrDespesas = gastos; // criando objeto para reter dados do condominio
+        vlrCaixa = caixa;
+    }
+}
+
+public class Moradores{
+    
+    public string Nome {get; set; }//criando objeto reter dados dos moradores
+    public string Telefone {get; set; }
+    public string Apartamento {get; set; }
+    public string Bloco {get; set; }
+    
+    public Moradores (string nome, string telefone, string apartamento, string bloco){
+        
+        Nome = nome;
+        Telefone = telefone;
+        Apartamento = apartamento;
+        Bloco = bloco;
+    }
+}
+
+class GestaoDeCondomino{
+    static void Main(){
+    
+    List<Moradores> lstmoradores = new List<Moradores>(); // criando a listas com base nos objetos
+    List<Condominio> lstcondominio = new List<Condominio>();
+
+    while(true){
+        
+        Console.WriteLine("Para cadastrar um morador, selecione uma das opções abaixo: \n");
+        Console.WriteLine("\n[1] Adicione um proprietário");
+        Console.WriteLine("\n[2] Exibir lista de propietários");
+        Console.WriteLine("\n[3] Pesquisar um proprietário");
+        Console.WriteLine("\n[4] Remover proprietário");
+        Console.WriteLine("\n[5] Sair");
+        
+        string opcao = Console.ReadLine();
+        
+        switch (opcao){
+            
+            case "1": //switch case com as opções do usuário
+            
+                Console.Write("Digite o nome do propietário: ");
+                string nome = Console.ReadLine();
+                
+                Console.Write("\nDigite o telefone do propietário: ");
+                string telefone = Console.ReadLine();
+                
+                Console.Write("\nDigite o apartamento do propietário: ");
+                string apartamento = Console.ReadLine();
+                
+                Console.Write("\nDigite o bloco do propietário: ");
+                string bloco = Console.ReadLine();
+                
+                lstmoradores.Add(new Moradores(nome, telefone, apartamento, bloco)); //Está adicionando os dados na lista criada
+                Console.WriteLine($"Morador {nome} adicionado com sucesso!");
+                break;
+                
+            case "2":
+                Console.Write("Digite o nome do propietário que queira pesquisar: ");
+                string pesquisa = Console.ReadLine();
+                
+                if(lstmoradores.Count == 0){
+                    Console.WriteLine("Nenhum morador encontrado!\n Certifique-se se o morador foi regitrado ou se o nome foi registrado corretamente");
+                }
+                else{
+                    foreach(Moradores morador in lstmoradores){
+                        Console.WriteLine($"Nome: {nome.morador}\nTelefone: {telefone.morador}\nApartamento: {apartamento.morador} {bloco.morador}");
+                    }
+                }
+        }
+    }
+    
+}
+
+}
