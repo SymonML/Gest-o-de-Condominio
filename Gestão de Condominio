@@ -70,17 +70,21 @@ class GestaoDeCondomino{
                 break;
                 
             case "2":
-                Console.Write("Digite o nome do propietário que queira pesquisar: ");
-                string pesquisa = Console.ReadLine();
+                Console.Write("Lista de moradores: ");
                 
                 if(lstmoradores.Count == 0){
-                    Console.WriteLine("Nenhum morador encontrado!\n Certifique-se se o morador foi regitrado ou se o nome foi registrado corretamente");
+                    Console.WriteLine("Nenhum morador encontrado!");
                 }
                 else{
                     foreach(Moradores morador in lstmoradores){
-                        Console.WriteLine($"Nome: {nome.morador}\nTelefone: {telefone.morador}\nApartamento: {apartamento.morador} {bloco.morador}");
+                        Console.WriteLine($"Nome: {morador.Nome}\nTelefone: {morador.Telefone}\nApartamento: {morador.Apartamento} {morador.Bloco}");
                     }
                 }
+                break;
+                
+            case "3":
+                Console.Write("Digite o nome no qual quer pesquisar: ");
+                string pequisa = Console.ReadLine();
         }
     }
     
