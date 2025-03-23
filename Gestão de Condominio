@@ -83,8 +83,20 @@ class GestaoDeCondomino{
                 break;
                 
             case "3":
-                Console.Write("Digite o nome no qual quer pesquisar: ");
+                Console.Write("A pesquisa será feita por [Nome] [Telefone] [E-mail]: ");
                 string pequisa = Console.ReadLine();
+                
+                Console.Write("De acordo com a seleção a cima, selecione a opção para busca: ");
+                string opcaoPesquisa = Console.ReadLine();
+                
+                List<Moradores> resultadoPesquisa = new List<Moradores>
+                
+                if(pesquisa = "nome")
+                    resultadoPesquisa = lstmoradores.Where(m => m.Nome.Tolower().Contains(opcaoPesquisa.Tolower())).ToList();
+            
+                else if(pesquisa = "telefone")//parei aqui, continur daqui 
+                    
+                break;
         }
     }
     
