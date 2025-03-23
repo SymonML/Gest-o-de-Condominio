@@ -83,19 +83,26 @@ class GestaoDeCondomino{
                 break;
                 
             case "3":
-                Console.Write("A pesquisa será feita por [Nome] [Telefone] [E-mail]: ");
+                Console.Write("A pesquisa será feita por [Nome] [Telefone] [Apartamento e Endereço]: ");
                 string pequisa = Console.ReadLine();
                 
                 Console.Write("De acordo com a seleção a cima, selecione a opção para busca: ");
                 string opcaoPesquisa = Console.ReadLine();
                 
-                List<Moradores> resultadoPesquisa = new List<Moradores>
+                List<Moradores> resultadoPesquisa = new List<Moradores>();
                 
-                if(pesquisa = "nome")
-                    resultadoPesquisa = lstmoradores.Where(m => m.Nome.Tolower().Contains(opcaoPesquisa.Tolower())).ToList();
+                if(pesquisa == "nome"){
+                    resultadoPesquisa = lstmoradores.Where(m => m.Nome.ToLower().Contains(opcaoPesquisa.ToLower())).ToList();
+                }
             
-                else if(pesquisa = "telefone")//parei aqui, continur daqui 
-                    
+                else if(pesquisa == "telefone"){
+                    resultadoPesquisa = lstmoradores.Where(m => m.Telefone.Tolower().Contains(opcaoPesquisa.ToLower())).ToList();
+                }
+                
+                else if (pesquisa == "apartamento e bloco"){
+                    resultadoPesquisa = lstmoradores.Where(m => m.Apartamento.ToLower().Contains(opcaoPesquisa.ToLower()) || m.Bloco.ToLower().Contains(opcaoPesquisa.ToLower())).ToList();
+                }
+                
                 break;
         }
     }
