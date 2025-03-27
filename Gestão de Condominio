@@ -34,7 +34,7 @@ class GestaoDeCondomino{
         List<Condominio> lstcondominio = new List<Condominio>();
 
         while(true){
-            Console.WriteLine("Para cadastrar um morador, selecione uma das opções abaixo: \n");
+            Console.WriteLine("\nPara cadastrar um morador, selecione uma das opções abaixo: \n");
             Console.WriteLine("\n[1] Adicione um proprietário");
             Console.WriteLine("\n[2] Exibir lista de proprietários");
             Console.WriteLine("\n[3] Pesquisar um proprietário");
@@ -57,8 +57,13 @@ class GestaoDeCondomino{
                     Console.Write("\nDigite o bloco do proprietário: ");
                     string bloco = Console.ReadLine();
                     
+                    Console.Write("\nEfetuou o pagamento do condominio ? Digite [s] para 'sim' e [n] para 'não);
+                    bool pagamento = Console.ReadLine();
+                    
+                    float valor // parei aqui
+                    
                     lstmoradores.Add(new Moradores(nome, telefone, apartamento, bloco)); // Adicionando os dados na lista criada
-                    Console.WriteLine($"Morador {nome} adicionado com sucesso!");
+                    Console.WriteLine($"\nMorador {nome} adicionado com sucesso!");
                     break;
                 
                 case "2":
@@ -70,8 +75,6 @@ class GestaoDeCondomino{
                     else{
                         foreach (Moradores morador in lstmoradores){
                             Console.WriteLine($"Nome: {morador.Nome}\nTelefone: {morador.Telefone}\nApartamento: {morador.Apartamento} {morador.Bloco}");
-                            
-                            Console.WriteLine("Deseja ")
                         }
                     }
                     break;
