@@ -2,49 +2,56 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Condominio{
-    public bool Pagamento { get; set; }
-    public float VlrDespesas { get; set; }
+public class Condominio
+{
     public float VlrCaixa { get; set; }
     
-    public Condominio(bool pagamento, float gastos, float caixa){
-        Pagamento = pagamento;
-        VlrDespesas = gastos; // criando objeto para reter dados do condominio
+    public Condominio(float caixa)  // Criando objeto para reter dados do condomínio
+    {
         VlrCaixa = caixa;
     }
 }
 
-public class Moradores{
-    public string Nome { get; set; } // criando objeto para reter dados dos moradores
+public class Moradores
+{
+    public string Nome { get; set; }  // Criando objeto para reter dados dos moradores
     public string Telefone { get; set; }
     public string Apartamento { get; set; }
     public string Bloco { get; set; }
+    public float VlrPago { get; set; }
     
-    public Moradores(string nome, string telefone, string apartamento, string bloco){
+    public Moradores(string nome, string telefone, string apartamento, string bloco, float valor)
+    {
         Nome = nome;
         Telefone = telefone;
         Apartamento = apartamento;
         Bloco = bloco;
+        VlrPago = valor;
     }
 }
 
-class GestaoDeCondomino{
-    static void Main(){
-        List<Moradores> lstmoradores = new List<Moradores>(); // criando a lista com base nos objetos
-        List<Condominio> lstcondominio = new List<Condominio>();
+}
+class GestaoDeCondominio
+{
+    static void Main()
+    {
+        List<Moradores> lstmoradores = new List<Moradores>(); // Criando a lista com base nos objetos
 
-        while(true){
+        while (true)
+        {
             Console.WriteLine("\nPara cadastrar um morador, selecione uma das opções abaixo: \n");
             Console.WriteLine("\n[1] Adicione um proprietário");
             Console.WriteLine("\n[2] Exibir lista de proprietários");
             Console.WriteLine("\n[3] Pesquisar um proprietário");
             Console.WriteLine("\n[4] Remover proprietário");
-            Console.WriteLine("\n[5] Sair");
+            Console.WriteLine("\n[5] Mostrar o valor do caixa");
+            Console.WriteLine("\n[6] Sair");
             
             string opcao = Console.ReadLine();
             
-            switch (opcao){
-                case "1": // switch case com as opções do usuário
+            switch (opcao)
+            {
+                case "1":  // Adicionar morador
                     Console.Write("Digite o nome do proprietário: ");
                     string nome = Console.ReadLine();
                     
@@ -57,29 +64,46 @@ class GestaoDeCondomino{
                     Console.Write("\nDigite o bloco do proprietário: ");
                     string bloco = Console.ReadLine();
                     
-                    Console.Write("\nEfetuou o pagamento do condominio ? Digite [s] para 'sim' e [n] para 'não);
-                    bool pagamento = Console.ReadLine();
+                    float valor = 0;
+                    Console.Write("\nEfetuou o pagamento do condomínio? Digite [s] para 'sim' e [n] para 'não': ");
+                    string pagamento = Console.ReadLine().ToLower();  // ToLower() converte para minúsculo
+                    if (pagamento == "s")
+                    {
+                        valor = 100;  // Definindo valor fixo de pagamento
+                    }
+                    else
+                    {
+                        valor = 0;  // Caso não tenha pago
+                    }
                     
-                    float valor // parei aqui
-                    
-                    lstmoradores.Add(new Moradores(nome, telefone, apartamento, bloco)); // Adicionando os dados na lista criada
+                    lstmoradores.Add(new Moradores(nome, telefone, apartamento, bloco, valor)); // Adicionando os dados na lista
                     Console.WriteLine($"\nMorador {nome} adicionado com sucesso!");
                     break;
                 
-                case "2":
+                case "2":  // Exibir lista de moradores
                     Console.WriteLine("Lista de moradores: ");
                     
-                    if (lstmoradores.Count == 0){
+                    if (lstmoradores.Count == 0)  // Verificando se a lista está vazia
+                    {
                         Console.WriteLine("Nenhum morador encontrado!");
                     }
-                    else{
-                        foreach (Moradores morador in lstmoradores){
-                            Console.WriteLine($"Nome: {morador.Nome}\nTelefone: {morador.Telefone}\nApartamento: {morador.Apartamento} {morador.Bloco}");
-                        }
+                    else
+                    {
+                        foreach (Moradores morador in lstmoradores)
+                        {
+                            if (morador.VlrPago == 0)
+                            {
+                                Console.WriteLine($"Nome: {morador.Nome}\nTelefone: {morador.Telefone}\nApartamento: {morador.Apartamento} {morador.Bloco} ");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Nome: {morador.Nome}\nTelefone: {morador.Telefone}\nApartamento: {morador.Apartamento} {morador.Bloco} \nValor pago: {morador.VlrPago} ");
+                            }
+                        }   
                     }
                     break;
                 
-                case "3":
+                case "3":  // Pesquisar um morador
                     Console.Write("A pesquisa será feita por [Nome] [Telefone] [Apartamento e Bloco]: ");
                     string pesquisa = Console.ReadLine().ToLower();
                     
@@ -88,41 +112,59 @@ class GestaoDeCondomino{
                     
                     List<Moradores> resultadoPesquisa = new List<Moradores>();
                     
-                    if (pesquisa == "nome"){
+                    if (pesquisa == "nome")
+                    {
                         resultadoPesquisa = lstmoradores.Where(m => m.Nome.ToLower().Contains(opcaoPesquisa)).ToList();
                     }
-                    else if (pesquisa == "telefone"){
+                    else if (pesquisa == "telefone")
+                    {
                         resultadoPesquisa = lstmoradores.Where(m => m.Telefone.ToLower().Contains(opcaoPesquisa)).ToList();
                     }
-                    else if (pesquisa == "apartamento e bloco"){
+                    else if (pesquisa == "apartamento e bloco")
+                    {
                         resultadoPesquisa = lstmoradores.Where(m => m.Apartamento.ToLower().Contains(opcaoPesquisa) || m.Bloco.ToLower().Contains(opcaoPesquisa)).ToList();
                     }
                     
-                    if (resultadoPesquisa.Count == 0){
+                    if (resultadoPesquisa.Count == 0)
+                    {
                         Console.WriteLine("Nenhum resultado encontrado!");
                     }
-                    else{
-                        foreach (var morador in resultadoPesquisa){
+                    else
+                    {
+                        foreach (var morador in resultadoPesquisa)
+                        {
                             Console.WriteLine($"Nome: {morador.Nome}\nTelefone: {morador.Telefone}\nApartamento: {morador.Apartamento} {morador.Bloco}");
                         }
                     }
                     break;
                 
-                case "4":
+                case "4":  // Remover morador
                     Console.Write("Digite o nome do proprietário a ser removido: ");
                     string nomeRemover = Console.ReadLine().ToLower();
                     Moradores moradorRemover = lstmoradores.FirstOrDefault(m => m.Nome.ToLower() == nomeRemover);
                     
-                    if (moradorRemover != null){
-                        lstmoradores.Remove(moradorRemover);
+                    if (moradorRemover != null)
+                    {
+                        lstmoradores.Remove(moradorRemover);  // Remove o morador da lista
                         Console.WriteLine($"Morador {moradorRemover.Nome} removido com sucesso!");
                     }
-                    else{
+                    else
+                    {
                         Console.WriteLine("Morador não encontrado!");
                     }
                     break;
+                    
+                case "5":  // Mostrar valor do caixa
+                    float somatoria = 0; // lembre de atribuir valor para o break +=
+                    foreach (Moradores morador in lstmoradores)
+                    {
+                        somatoria += morador.VlrPago;  // Calculando a soma dos valores pagos
+                    }
+                    
+                    Console.WriteLine($"\nValor total do caixa do condomínio: {somatoria}");
+                    break;
                 
-                case "5":
+                case "6":  // Sair do sistema
                     Console.WriteLine("Saindo do sistema...");
                     return;
                 
