@@ -6,7 +6,7 @@ public class Condominio
 {
     public float VlrCaixa { get; set; }
     
-    public Condominio(float caixa)  // Criando objeto para reter dados do condomínio
+    public Condominio(float caixa)
     {
         VlrCaixa = caixa;
     }
@@ -14,7 +14,7 @@ public class Condominio
 
 public class Moradores
 {
-    public string Nome { get; set; }  // Criando objeto para reter dados dos moradores
+    public string Nome { get; set; } 
     public string Telefone { get; set; }
     public string Apartamento { get; set; }
     public string Bloco { get; set; }
@@ -30,12 +30,11 @@ public class Moradores
     }
 }
 
-}
 class GestaoDeCondominio
 {
     static void Main()
     {
-        List<Moradores> lstmoradores = new List<Moradores>(); // Criando a lista com base nos objetos
+        List<Moradores> lstmoradores = new List<Moradores>(); 
 
         while (true)
         {
@@ -51,7 +50,7 @@ class GestaoDeCondominio
             
             switch (opcao)
             {
-                case "1":  // Adicionar morador
+                case "1": 
                     Console.Write("Digite o nome do proprietário: ");
                     string nome = Console.ReadLine();
                     
@@ -66,24 +65,24 @@ class GestaoDeCondominio
                     
                     float valor = 0;
                     Console.Write("\nEfetuou o pagamento do condomínio? Digite [s] para 'sim' e [n] para 'não': ");
-                    string pagamento = Console.ReadLine().ToLower();  // ToLower() converte para minúsculo
+                    string pagamento = Console.ReadLine().ToLower(); 
                     if (pagamento == "s")
                     {
-                        valor = 100;  // Definindo valor fixo de pagamento
+                        valor = 100; 
                     }
                     else
                     {
-                        valor = 0;  // Caso não tenha pago
+                        valor = 0; 
                     }
                     
-                    lstmoradores.Add(new Moradores(nome, telefone, apartamento, bloco, valor)); // Adicionando os dados na lista
+                    lstmoradores.Add(new Moradores(nome, telefone, apartamento, bloco, valor));
                     Console.WriteLine($"\nMorador {nome} adicionado com sucesso!");
                     break;
                 
-                case "2":  // Exibir lista de moradores
+                case "2":  
                     Console.WriteLine("Lista de moradores: ");
                     
-                    if (lstmoradores.Count == 0)  // Verificando se a lista está vazia
+                    if (lstmoradores.Count == 0)  
                     {
                         Console.WriteLine("Nenhum morador encontrado!");
                     }
@@ -103,7 +102,7 @@ class GestaoDeCondominio
                     }
                     break;
                 
-                case "3":  // Pesquisar um morador
+                case "3":  
                     Console.Write("A pesquisa será feita por [Nome] [Telefone] [Apartamento e Bloco]: ");
                     string pesquisa = Console.ReadLine().ToLower();
                     
@@ -138,14 +137,14 @@ class GestaoDeCondominio
                     }
                     break;
                 
-                case "4":  // Remover morador
+                case "4": 
                     Console.Write("Digite o nome do proprietário a ser removido: ");
                     string nomeRemover = Console.ReadLine().ToLower();
                     Moradores moradorRemover = lstmoradores.FirstOrDefault(m => m.Nome.ToLower() == nomeRemover);
                     
                     if (moradorRemover != null)
                     {
-                        lstmoradores.Remove(moradorRemover);  // Remove o morador da lista
+                        lstmoradores.Remove(moradorRemover); 
                         Console.WriteLine($"Morador {moradorRemover.Nome} removido com sucesso!");
                     }
                     else
@@ -154,17 +153,17 @@ class GestaoDeCondominio
                     }
                     break;
                     
-                case "5":  // Mostrar valor do caixa
-                    float somatoria = 0; // lembre de atribuir valor para o break +=
+                case "5": 
+                    float somatoria = 0; 
                     foreach (Moradores morador in lstmoradores)
                     {
-                        somatoria += morador.VlrPago;  // Calculando a soma dos valores pagos
+                        somatoria += morador.VlrPago;  
                     }
                     
                     Console.WriteLine($"\nValor total do caixa do condomínio: {somatoria}");
                     break;
                 
-                case "6":  // Sair do sistema
+                case "6":  
                     Console.WriteLine("Saindo do sistema...");
                     return;
                 
